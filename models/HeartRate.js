@@ -7,7 +7,7 @@ const heartRateSchema = new mongoose.Schema({
   },
   spo2: {
     type: String,
-    required: true
+     
   }
 });
 
