@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const heartRateSchema = new mongoose.Schema({
   heartRate: {
-    type: String,
+    type: Number,
     required: true
   },
   spo2: {
-    type: String,
+    type: Number,
      
   }
 });
