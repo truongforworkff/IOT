@@ -3,19 +3,28 @@ const router = express.Router();
 const HeartRate = require('../models/HeartRate');
 
 // POST route to receive data from IoT device
-router.post('/data', async (req, res) => {
-    const { heartRate, spo2 } = req.body;
-  
-    console.log('Received data:', { heartRate, spo2 });
-  
-    try {
-      const newHeartRate = new HeartRate({ heartRate, spo2 });
-      await newHeartRate.save();
-      res.status(201).json(newHeartRate);
-    } catch (error) {
-      console.error('Error saving data:', error);
-      res.status(500).json({ error: error.message });
+app.post('/data', (req, res) => {
+    const heartRate = parseInt(req.body.heartRate, 10);
+    const spo2 = parseInt(req.body.spo2, 10);
+
+    if (isNaN(heartRate) || isNaN(spo2)) {
+        return res.status(400).send('Invalid data');
     }
-  });
+
+    // Lưu dữ liệu vào cơ sở dữ liệu
+    const newData = new Data({
+        heartRate: heartRate,
+        spo2: spo2
+    });
+
+    newData.save((err) => {
+        if (err) {
+            console.error('Error saving data:', err);
+            return res.status(500).send('Error saving data');
+        }
+        res.status(200).send('Data saved successfully');
+    });
+});
+
 
 module.exports = router;
