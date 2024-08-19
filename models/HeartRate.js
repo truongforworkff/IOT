@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 
 const heartRateSchema = new mongoose.Schema({
-  heartRate: Number,
-  spo2: Number,
-  timestamp: { type: Date, default: Date.now }
+  heartRate: {
+    type: String,
+    required: true
+  },
+  spo2: {
+    type: String,
+    required: true
+  }
 });
 
-const HeartRate = mongoose.model('HeartRate', heartRateSchema);
-
-module.exports = HeartRate;
+module.exports = mongoose.model('HeartRate', heartRateSchema);
