@@ -3,7 +3,7 @@ const router = express.Router();
 const HeartRate = require('../models/HeartRate');
 
 // POST route to receive data from IoT device
-app.post('/data', (req, res) => {
+router.post('/data', (req, res) => {
     const heartRate = parseInt(req.body.heartRate, 10);
     const spo2 = parseInt(req.body.spo2, 10);
 
